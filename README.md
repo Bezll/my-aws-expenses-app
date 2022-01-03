@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# Project to explore Github Actions and AWS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The code in this repository was borrowed from a previous toy project I created some time ago.
 
-## Available Scripts
+My intention was to take this expenses app, host it on AWS, and then write an automation workflow for it.
+So that on any commits to the master branch are automatically applied to the live site.
 
-In the project directory, you can run:
+The purpose of this was to familiarise myself with the process of hosting a site on AWS, and creating Github Actions for automation. I have been studying backend and frontend at Northcoders, but I felt it would be also useful to explore some of the DevOps side of development.
 
-### `npm start`
+## Writing the Workflow
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+When any of the files within this repository are updated and committed to the Github master branch. The workflow YAML file sets up a Virtual Machine and builds the project within this machine.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The script uses Checkout to ensure that the latest version of source code is being used,
+and then dependencies are installed and the build is run.
 
-### `npm test`
+The built project is then added to the AWS S3 bucket, secret access keys are saved in Github to allow authorisation.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Hosting on AWS
 
-### `npm run build`
+To host the app on AWS I first had to create an S3 bucket to hold all of the files.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I created a IAM (Identity Access Management) policy, to ensure that only the minimum access permissions would be granted.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Once this had been setup and the Github workflow had successfully pushed the files to the S3 bucket. I purchased the domain I wished to use for the app - www.expense-tracker.co.uk, from Route 53.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+I requested an SSL certificate to verify security for HTTPS requests, and then wired my S3 bucket to CloudFront. This is then also routed to my new domain, adding in the relevant SSL certificate information.
