@@ -18,7 +18,7 @@ The built project is then added to the AWS S3 bucket, secret access keys are sav
 
 ## Flow chart
 
-![flow chart]()
+![flow chart](https://github.com/Bezll/my-aws-expenses-app/blob/master/flowchart.png)
 
 ## Hosting on AWS
 
