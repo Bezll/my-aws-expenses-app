@@ -16,6 +16,10 @@ and then dependencies are installed and the build is run.
 
 The built project is then added to the AWS S3 bucket, secret access keys are saved in Github to allow authorisation.
 
+## Flow chart
+
+![flow chart]()
+
 ## Hosting on AWS
 
 To host the app on AWS I first had to create an S3 bucket to hold all of the files.
