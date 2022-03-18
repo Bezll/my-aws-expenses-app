@@ -3,7 +3,7 @@
 The code in this repository was borrowed from a previous toy project I created some time ago.
 
 My intention was to take this expenses app, host it on AWS, and then write an automation workflow for it.
-So that on any commits to the master branch are automatically applied to the live site.
+So that any commits to the master branch are automatically applied to the live site.
 
 The purpose of this was to familiarise myself with the process of hosting a site on AWS, and creating Github Actions for automation. I have been studying backend and frontend at Northcoders, but I felt it would be also useful to explore some of the DevOps side of development.
 
